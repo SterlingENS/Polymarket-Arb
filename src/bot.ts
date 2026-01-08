@@ -65,7 +65,7 @@ export class PolymarketArbitrageBot {
   /**
    * Scan all markets for arbitrage opportunities
    */
-  private async scanForOpportunities(): Promise<void> {
+  protected async scanForOpportunities(): Promise<void> {
     console.log(`[${new Date().toISOString()}] Scanning markets...`);
 
     const markets = await this.client.getActiveMarkets();

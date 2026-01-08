@@ -68,7 +68,7 @@ function broadcast(message: any) {
 class WebArbitrageBot extends PolymarketArbitrageBot {
   protected async scanForOpportunities(): Promise<void> {
     const beforeCount = this.getOpportunities().length;
-    await super['scanForOpportunities']();
+    await super.scanForOpportunities();
     const afterCount = this.getOpportunities().length;
 
     // If new opportunities were found, broadcast them
