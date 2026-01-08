@@ -16,12 +16,15 @@ Arbitrage on prediction markets occurs when the sum of prices for all outcomes i
 
 ## 🚀 Features
 
+- **Web Dashboard**: Modern, real-time web interface for monitoring and control
 - **Real-time Market Scanning**: Continuously monitors all active Polymarket markets
 - **Automated Arbitrage Detection**: Identifies profitable arbitrage opportunities
+- **WebSocket Updates**: Live opportunity updates pushed to your browser
 - **Configurable Thresholds**: Set minimum profit percentages and position sizes
 - **Position Size Calculator**: Automatically calculates optimal position sizes
 - **Detailed Reporting**: Shows profit percentages, investment needed, and expected returns
 - **TypeScript**: Fully typed for better development experience
+- **Dual Mode**: Run with web interface or command-line only
 
 ## 📋 Prerequisites
 
@@ -61,17 +64,36 @@ MAX_POSITION_SIZE_USDC=100       # Maximum investment per opportunity
 
 ## 🎮 Usage
 
-### Development Mode
+### Web Interface (Recommended)
+
+The bot includes a modern web dashboard for easy monitoring and control:
+
 ```bash
-npm run dev
+# Install dependencies for both server and web
+npm install
+cd web && npm install && cd ..
+
+# Development mode (with hot reload)
+npm run dev:server
+
+# Then open http://localhost:3001 in your browser
 ```
 
-### Production Mode
-```bash
-# Build the project
-npm run build
+**Web Dashboard Features:**
+- Real-time opportunity updates via WebSocket
+- Start/stop bot with one click
+- Live statistics and monitoring
+- Configure settings through UI
+- Beautiful dark-themed interface
 
-# Run the bot
+### Command Line Mode
+
+```bash
+# Development mode
+npm run dev
+
+# Production mode
+npm run build
 npm start
 ```
 
@@ -160,14 +182,24 @@ npm run build
 ```
 Polymarket-Arb/
 ├── src/
-│   ├── index.ts              # Main entry point
+│   ├── index.ts              # CLI entry point
+│   ├── server.ts             # Web server entry point
 │   ├── bot.ts                # Bot orchestration logic
 │   ├── polymarket-client.ts  # API client for Polymarket
 │   ├── arbitrage-detector.ts # Arbitrage detection logic
 │   ├── config.ts             # Configuration management
 │   └── types.ts              # TypeScript type definitions
+├── web/
+│   ├── src/
+│   │   ├── App.tsx           # Main React component
+│   │   ├── main.tsx          # React entry point
+│   │   ├── api.ts            # Backend API client
+│   │   ├── useWebSocket.ts   # WebSocket hook
+│   │   └── components/       # React components
+│   ├── package.json          # Web dependencies
+│   └── vite.config.ts        # Vite configuration
 ├── .env.example              # Example environment variables
-├── package.json              # Dependencies and scripts
+├── package.json              # Server dependencies and scripts
 ├── tsconfig.json             # TypeScript configuration
 └── README.md                 # This file
 ```
