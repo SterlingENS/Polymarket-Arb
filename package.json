@@ -1,0 +1,38 @@
+{
+  "name": "solana-trading-fund",
+  "version": "1.0.0",
+  "description": "Solana-based trading fund with automated profit distribution",
+  "main": "index.js",
+  "scripts": {
+    "test": "anchor test",
+    "build": "anchor build",
+    "deploy": "anchor deploy",
+    "start-bot": "ts-node app/trading-bot.ts",
+    "client": "ts-node app/client.ts"
+  },
+  "keywords": [
+    "solana",
+    "trading",
+    "defi",
+    "fund"
+  ],
+  "author": "SterlingENS",
+  "license": "MIT",
+  "dependencies": {
+    "@coral-xyz/anchor": "^0.29.0",
+    "@solana/spl-token": "^0.3.11",
+    "@solana/web3.js": "^1.87.6",
+    "dotenv": "^16.3.1",
+    "axios": "^1.6.2"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.3.11",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^20.10.6",
+    "chai": "^4.4.0",
+    "mocha": "^10.2.0",
+    "ts-mocha": "^10.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
