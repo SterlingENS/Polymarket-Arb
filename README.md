@@ -43,6 +43,16 @@ User-friendly CLI (`app/client.ts`) for:
 - Claiming fund tokens
 - Viewing balances and statistics
 
+### Web UI
+
+Modern web interface (`ui/`) with:
+- Wallet connection (Phantom, Solflare, etc.)
+- Real-time fund statistics dashboard
+- Interactive deposit/withdrawal forms
+- Portfolio tracking with profit/loss
+- Live trading activity feed
+- Responsive design for all devices
+
 ## 📦 Installation
 
 ### Prerequisites
@@ -137,6 +147,20 @@ The bot will:
 - Display trade results
 - Automatically record profits on-chain
 - Show profit distribution (10% → tokens, 90% → reinvest)
+
+### 5b. Start the Web UI (Alternative)
+
+For a better user experience, use the web interface:
+
+```bash
+cd ui
+npm install
+cp .env.example .env.local
+# Edit .env.local with your program ID
+npm run dev
+```
+
+Then open [http://localhost:3000](http://localhost:3000) in your browser and connect your wallet.
 
 ### 6. Check Your Balance
 
@@ -284,6 +308,14 @@ Polymarket-Arb/
 ├── app/
 │   ├── trading-bot.ts          # Automated trading bot
 │   └── client.ts               # User CLI interface
+├── ui/                         # Web UI (Next.js)
+│   ├── src/
+│   │   ├── app/               # Next.js pages
+│   │   ├── components/        # React components
+│   │   ├── contexts/          # Wallet provider
+│   │   └── hooks/             # Custom hooks
+│   ├── package.json
+│   └── README.md              # UI documentation
 ├── tests/
 │   └── trading-fund.ts         # Integration tests
 ├── Anchor.toml                 # Anchor configuration
@@ -291,6 +323,7 @@ Polymarket-Arb/
 ├── package.json                # Node dependencies
 ├── tsconfig.json               # TypeScript config
 ├── .env.example                # Environment template
+├── QUICKSTART.md               # Quick start guide
 └── README.md                   # This file
 ```
 
@@ -300,11 +333,12 @@ Polymarket-Arb/
 - [ ] Add Raydium liquidity pool support
 - [ ] Implement advanced trading strategies
 - [ ] Add governance voting with fund tokens
-- [ ] Create web UI dashboard
+- [x] Create web UI dashboard
 - [ ] Multi-token support (not just SOL)
 - [ ] Implement stop-loss and take-profit
 - [ ] Add price oracle integration
 - [ ] Mobile app interface
+- [ ] Mobile-optimized PWA
 
 ## 🤝 Contributing
 
