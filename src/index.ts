@@ -62,3 +62,30 @@ export function createProtocol(config?: {
     mixingDelayMs: config?.mixingDelayMs ?? 5000,
   });
 }
+
+// Solana-specific exports
+export { SolanaX402ProtocolHandler } from './protocol/solana-x402handler';
+export type { SolanaNetworkConfig } from './protocol/solana-x402handler';
+
+export {
+  generateSolanaKeyPair,
+  signMessage,
+  verifyMessage,
+  encryptForSolana,
+  decryptForSolana,
+  solToLamports,
+  lamportsToSol,
+  generateSolanaTransactionId,
+} from './crypto/solana-crypto';
+export type { SolanaKeyPair } from './crypto/solana-crypto';
+
+export {
+  generateSolanaStealthAddress,
+  deriveOneTimeSolanaAddress,
+  createSolanaStealthPayment,
+  isSolanaTransactionForMe,
+  scanForStealthPayments,
+  createStealthTransaction,
+  recoverStealthKeypair,
+} from './crypto/solana-stealth';
+export type { SolanaStealthAddress } from './crypto/solana-stealth';

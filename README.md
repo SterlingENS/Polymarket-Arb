@@ -5,11 +5,13 @@ Privacy-preserving arbitrage trading system for Polymarket with integrated x402 
 ## Features
 
 - **Privacy x402 Protocol**: Advanced privacy-preserving transaction protocol
+- **Multi-Chain Support**: Full support for Ethereum and Solana blockchains
 - **Multiple Privacy Levels**: From basic encryption to zero-knowledge proofs
 - **Stealth Addresses**: One-time addresses for transaction privacy
 - **Transaction Mixing**: Temporal obfuscation to prevent correlation
 - **Zero-Knowledge Proofs**: Prove transaction validity without revealing details
 - **Configurable Security**: Choose your privacy/performance trade-off
+- **Low-Cost Privacy**: Solana integration offers 1000x lower fees than Ethereum
 
 ## Privacy x402 Protocol
 
@@ -46,6 +48,38 @@ const response = await protocol.processTransaction(tx);
 console.log('Privacy Score:', response.privacyScore);
 console.log('Transaction Hash:', response.txHash);
 ```
+
+### Solana Quick Start
+
+```typescript
+import { SolanaX402ProtocolHandler, PrivacyLevel } from './src/index';
+
+// Initialize for Solana
+const protocol = new SolanaX402ProtocolHandler(
+  {
+    rpcUrl: 'https://api.devnet.solana.com',
+    cluster: 'devnet',
+  },
+  {
+    privacyLevel: PrivacyLevel.MAXIMUM,
+    enableMixing: true,
+  }
+);
+
+// Create Solana privacy transaction
+const tx = await protocol.createTransaction(
+  '0.1',                      // 0.1 SOL
+  'solana_public_key',        // recipient
+  { orderType: 'buy' },       // data
+  PrivacyLevel.STEALTH        // privacy level
+);
+
+const response = await protocol.processTransaction(tx);
+console.log('Solana TX:', response.txHash);
+console.log('Privacy Score:', response.privacyScore);
+```
+
+**See [SOLANA-DEPLOYMENT.md](SOLANA-DEPLOYMENT.md) for complete Solana deployment guide.**
 
 ## Installation
 
@@ -84,21 +118,40 @@ npx ts-node examples/basic-usage.ts
 ## Documentation
 
 - [Protocol Specification](PROTOCOL.md) - Detailed technical specification
+- [Solana Deployment Guide](SOLANA-DEPLOYMENT.md) - Complete guide for Solana deployment
 - [Examples](examples/) - Usage examples and code samples
+  - [Basic Usage](examples/basic-usage.ts) - Ethereum examples
+  - [Advanced Usage](examples/advanced-usage.ts) - Advanced Ethereum features
+  - [Solana Usage](examples/solana-usage.ts) - Solana examples
+
+## Multi-Chain Support
+
+| Feature | Ethereum | Solana |
+|---------|----------|--------|
+| **Transaction Fee** | $2-50 | $0.0005-0.001 |
+| **Confirmation Time** | ~12 seconds | ~400ms |
+| **Privacy Cost** | $5-100 | $0.001 |
+| **Throughput** | ~15 TPS | 65,000+ TPS |
+| **Network** | EVM-compatible | Solana mainnet |
+
+**Solana offers 1000x-100,000x cost reduction while maintaining privacy guarantees!**
 
 ## Architecture
 
 ```
 src/
 ├── types/
-│   └── protocol.ts          # Type definitions and interfaces
+│   └── protocol.ts              # Type definitions and interfaces
 ├── crypto/
-│   ├── encryption.ts        # NaCl encryption utilities
-│   ├── stealth.ts           # Stealth address implementation
-│   └── zkproof.ts           # Zero-knowledge proof generation
+│   ├── encryption.ts            # NaCl encryption utilities
+│   ├── stealth.ts               # Ethereum stealth addresses
+│   ├── zkproof.ts               # Zero-knowledge proof generation
+│   ├── solana-crypto.ts         # Solana cryptography utilities
+│   └── solana-stealth.ts        # Solana stealth addresses
 ├── protocol/
-│   └── x402handler.ts       # Main protocol handler
-└── index.ts                 # Public API exports
+│   ├── x402handler.ts           # Ethereum protocol handler
+│   └── solana-x402handler.ts    # Solana protocol handler
+└── index.ts                     # Public API exports
 ```
 
 ## Security
