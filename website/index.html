@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Privacy x402 Protocol - Privacy-preserving transaction protocol for Polymarket arbitrage on Ethereum and Solana">
+    <title>Privacy x402 Protocol - Multi-Chain Privacy for DeFi</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <i class="fas fa-shield-alt"></i>
+                <span>Privacy x402</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="docs.html">Docs</a></li>
+                <li><a href="examples.html">Examples</a></li>
+                <li><a href="api.html">API</a></li>
+                <li><a href="playground.html">Playground</a></li>
+                <li><a href="deployment.html">Deploy</a></li>
+                <li><a href="https://github.com/SterlingENS/Polymarket-Arb" target="_blank" class="github-link">
+                    <i class="fab fa-github"></i> GitHub
+                </a></li>
+            </ul>
+            <button class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="gradient-text">Privacy x402 Protocol</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Privacy-preserving transaction protocol for DeFi arbitrage
+                </p>
+                <p class="hero-description">
+                    Multi-chain support for Ethereum and Solana with zero-knowledge proofs,
+                    stealth addresses, and transaction mixing. Build private DeFi applications
+                    with quantifiable privacy guarantees.
+                </p>
+                <div class="hero-buttons">
+                    <a href="docs.html" class="btn btn-primary">
+                        <i class="fas fa-book"></i> Get Started
+                    </a>
+                    <a href="playground.html" class="btn btn-secondary">
+                        <i class="fas fa-play"></i> Try It Live
+                    </a>
+                    <a href="https://github.com/SterlingENS/Polymarket-Arb" class="btn btn-outline" target="_blank">
+                        <i class="fab fa-github"></i> View on GitHub
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-value">100,000x</div>
+                        <div class="stat-label">Cost Reduction on Solana</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">400ms</div>
+                        <div class="stat-label">Transaction Time</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">0.0-1.0</div>
+                        <div class="stat-label">Privacy Score</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Core Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>End-to-End Encryption</h3>
+                    <p>All transaction data encrypted using NaCl cryptography (Curve25519 + XSalsa20 + Poly1305)</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-secret"></i>
+                    </div>
+                    <h3>Stealth Addresses</h3>
+                    <p>Generate one-time payment addresses for enhanced transaction privacy and anonymity</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-fingerprint"></i>
+                    </div>
+                    <h3>Zero-Knowledge Proofs</h3>
+                    <p>Prove transaction validity without revealing sensitive data using cryptographic proofs</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-random"></i>
+                    </div>
+                    <h3>Transaction Mixing</h3>
+                    <p>Batch transactions for temporal obfuscation to prevent timing correlation attacks</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Privacy Scoring</h3>
+                    <p>Quantifiable privacy guarantees from 0.0 to 1.0 for every transaction</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3>Multi-Chain Support</h3>
+                    <p>Full support for Ethereum and Solana blockchains with unified API</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Levels Section -->
+    <section class="privacy-levels">
+        <div class="container">
+            <h2 class="section-title">Privacy Levels</h2>
+            <p class="section-subtitle">Choose your privacy/performance trade-off</p>
+            <div class="levels-grid">
+                <div class="level-card level-none">
+                    <div class="level-number">0</div>
+                    <h3>NONE</h3>
+                    <p class="level-description">No privacy features - public transactions</p>
+                    <div class="level-features">
+                        <div class="level-stat">
+                            <span class="stat-label">Privacy Score:</span>
+                            <span class="stat-value">0.0</span>
+                        </div>
+                        <div class="level-stat">
+                            <span class="stat-label">Latency:</span>
+                            <span class="stat-value">&lt;10ms</span>
+                        </div>
+                    </div>
+                    <div class="level-use-case">Testing only</div>
+                </div>
+                <div class="level-card level-basic">
+                    <div class="level-number">1</div>
+                    <h3>BASIC</h3>
+                    <p class="level-description">Payload encryption only</p>
+                    <div class="level-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Encryption</li>
+                        </ul>
+                        <div class="level-stat">
+                            <span class="stat-label">Privacy Score:</span>
+                            <span class="stat-value">0.15-0.25</span>
+                        </div>
+                        <div class="level-stat">
+                            <span class="stat-label">Latency:</span>
+                            <span class="stat-value">~20ms</span>
+                        </div>
+                    </div>
+                    <div class="level-use-case">Low-value transactions</div>
+                </div>
+                <div class="level-card level-stealth">
+                    <div class="level-number">2</div>
+                    <h3>STEALTH</h3>
+                    <p class="level-description">Stealth addresses for anonymity</p>
+                    <div class="level-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Encryption</li>
+                            <li><i class="fas fa-check"></i> Stealth Addresses</li>
+                        </ul>
+                        <div class="level-stat">
+                            <span class="stat-label">Privacy Score:</span>
+                            <span class="stat-value">0.40-0.60</span>
+                        </div>
+                        <div class="level-stat">
+                            <span class="stat-label">Latency:</span>
+                            <span class="stat-value">~50ms</span>
+                        </div>
+                    </div>
+                    <div class="level-use-case">Standard privacy</div>
+                </div>
+                <div class="level-card level-zk">
+                    <div class="level-number">3</div>
+                    <h3>ZERO_KNOWLEDGE</h3>
+                    <p class="level-description">Full ZK-proof privacy</p>
+                    <div class="level-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Encryption</li>
+                            <li><i class="fas fa-check"></i> Stealth Addresses</li>
+                            <li><i class="fas fa-check"></i> ZK Proofs</li>
+                        </ul>
+                        <div class="level-stat">
+                            <span class="stat-label">Privacy Score:</span>
+                            <span class="stat-value">0.70-0.80</span>
+                        </div>
+                        <div class="level-stat">
+                            <span class="stat-label">Latency:</span>
+                            <span class="stat-value">~100ms</span>
+                        </div>
+                    </div>
+                    <div class="level-use-case">High privacy</div>
+                </div>
+                <div class="level-card level-maximum">
+                    <div class="level-number">4</div>
+                    <h3>MAXIMUM</h3>
+                    <p class="level-description">All privacy features enabled</p>
+                    <div class="level-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Encryption</li>
+                            <li><i class="fas fa-check"></i> Stealth Addresses</li>
+                            <li><i class="fas fa-check"></i> ZK Proofs</li>
+                            <li><i class="fas fa-check"></i> Mixing</li>
+                            <li><i class="fas fa-check"></i> Obfuscation</li>
+                        </ul>
+                        <div class="level-stat">
+                            <span class="stat-label">Privacy Score:</span>
+                            <span class="stat-value">0.90-1.00</span>
+                        </div>
+                        <div class="level-stat">
+                            <span class="stat-label">Latency:</span>
+                            <span class="stat-value">~5000ms</span>
+                        </div>
+                    </div>
+                    <div class="level-use-case">Maximum privacy</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chain Comparison Section -->
+    <section class="chain-comparison">
+        <div class="container">
+            <h2 class="section-title">Multi-Chain Support</h2>
+            <p class="section-subtitle">Choose the blockchain that fits your needs</p>
+            <div class="comparison-table">
+                <div class="comparison-header">
+                    <div class="comparison-cell">Feature</div>
+                    <div class="comparison-cell ethereum">Ethereum</div>
+                    <div class="comparison-cell solana">Solana</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell">Transaction Fee</div>
+                    <div class="comparison-cell">$2 - $50</div>
+                    <div class="comparison-cell highlight">$0.0005 - $0.001</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell">Confirmation Time</div>
+                    <div class="comparison-cell">~12 seconds</div>
+                    <div class="comparison-cell highlight">~400ms</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell">Privacy Cost</div>
+                    <div class="comparison-cell">$5 - $100</div>
+                    <div class="comparison-cell highlight">$0.001</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell">Throughput</div>
+                    <div class="comparison-cell">~15 TPS</div>
+                    <div class="comparison-cell highlight">65,000+ TPS</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell">Best For</div>
+                    <div class="comparison-cell">High security, established ecosystem</div>
+                    <div class="comparison-cell">High performance, low costs</div>
+                </div>
+            </div>
+            <div class="comparison-highlight">
+                <i class="fas fa-bolt"></i>
+                <strong>Solana offers 1000x-100,000x cost reduction</strong> while maintaining privacy guarantees
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Example Section -->
+    <section class="code-example">
+        <div class="container">
+            <h2 class="section-title">Quick Start</h2>
+            <div class="code-tabs">
+                <button class="code-tab active" data-tab="ethereum">Ethereum</button>
+                <button class="code-tab" data-tab="solana">Solana</button>
+            </div>
+            <div class="code-content ethereum active">
+                <pre><code class="language-typescript">import { createProtocol, PrivacyLevel } from 'privacy-x402';
+
+// Initialize protocol for Ethereum
+const protocol = createProtocol({
+  privacyLevel: PrivacyLevel.MAXIMUM,
+  enableMixing: true,
+  mixingDelayMs: 5000,
+});
+
+// Create a privacy-preserving transaction
+const tx = await protocol.createTransaction(
+  '100.0',                    // amount
+  '0x742d35Cc...f0bEb',      // recipient
+  { orderType: 'buy' },       // data
+  PrivacyLevel.ZERO_KNOWLEDGE // privacy level
+);
+
+// Process the transaction
+const response = await protocol.processTransaction(tx);
+console.log('Privacy Score:', response.privacyScore);  // 0.70-0.80
+console.log('Transaction Hash:', response.txHash);</code></pre>
+            </div>
+            <div class="code-content solana">
+                <pre><code class="language-typescript">import { SolanaX402ProtocolHandler, PrivacyLevel } from 'privacy-x402';
+
+// Initialize for Solana
+const protocol = new SolanaX402ProtocolHandler(
+  {
+    rpcUrl: 'https://api.devnet.solana.com',
+    cluster: 'devnet',
+  },
+  {
+    privacyLevel: PrivacyLevel.MAXIMUM,
+    enableMixing: true,
+  }
+);
+
+// Create Solana privacy transaction
+const tx = await protocol.createTransaction(
+  '0.1',                      // 0.1 SOL
+  'solana_public_key',        // recipient
+  { orderType: 'buy' },       // data
+  PrivacyLevel.STEALTH        // privacy level
+);
+
+const response = await protocol.processTransaction(tx);
+console.log('Solana TX:', response.txHash);
+console.log('Privacy Score:', response.privacyScore);  // 0.40-0.60</code></pre>
+            </div>
+            <div class="code-buttons">
+                <a href="docs.html" class="btn btn-primary">
+                    <i class="fas fa-book"></i> Read Full Documentation
+                </a>
+                <a href="examples.html" class="btn btn-secondary">
+                    <i class="fas fa-code"></i> View More Examples
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Build Private DeFi Applications?</h2>
+            <p>Get started with Privacy x402 Protocol today</p>
+            <div class="cta-buttons">
+                <a href="docs.html" class="btn btn-primary">
+                    <i class="fas fa-rocket"></i> Get Started
+                </a>
+                <a href="playground.html" class="btn btn-outline">
+                    <i class="fas fa-play"></i> Try Demo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Privacy x402 Protocol</h3>
+                    <p>Privacy-preserving transactions for DeFi</p>
+                    <div class="footer-social">
+                        <a href="https://github.com/SterlingENS/Polymarket-Arb" target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" target="_blank">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="docs.html">Getting Started</a></li>
+                        <li><a href="api.html">API Reference</a></li>
+                        <li><a href="examples.html">Examples</a></li>
+                        <li><a href="deployment.html">Deployment</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="playground.html">Playground</a></li>
+                        <li><a href="https://github.com/SterlingENS/Polymarket-Arb">GitHub</a></li>
+                        <li><a href="https://github.com/SterlingENS/Polymarket-Arb/issues">Report Issue</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Protocol</h4>
+                    <ul>
+                        <li><a href="docs.html#privacy-levels">Privacy Levels</a></li>
+                        <li><a href="docs.html#security">Security</a></li>
+                        <li><a href="docs.html#architecture">Architecture</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Privacy x402 Protocol. Licensed under MIT.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -10,7 +10,9 @@
     "lint": "eslint src/**/*.ts",
     "dev": "ts-node src/index.ts",
     "deploy:solana": "ts-node scripts/deploy-solana.ts",
-    "example:solana": "ts-node examples/solana-usage.ts"
+    "example:solana": "ts-node examples/solana-usage.ts",
+    "website": "cd website && python3 -m http.server 8080",
+    "website:build": "echo 'Static website - no build needed'"
   },
   "keywords": [
     "polymarket",

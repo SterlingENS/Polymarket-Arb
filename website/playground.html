@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playground - Privacy x402 Protocol</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .playground {
+            padding: 4rem 0;
+        }
+
+        .playground-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .playground-panel {
+            background: var(--bg-card);
+            border-radius: 1rem;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="number"],
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .form-group input[type="checkbox"] {
+            margin-right: 0.5rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            background: var(--bg-tertiary);
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .checkbox-group:hover {
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .checkbox-group input {
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .result-card {
+            background: var(--bg-tertiary);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .score-display {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .score-number {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .score-bar-container {
+            width: 100%;
+            height: 30px;
+            background: var(--bg-tertiary);
+            border-radius: 1rem;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .score-bar-fill {
+            height: 100%;
+            transition: all 0.5s ease;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 1rem;
+            color: white;
+            font-weight: 700;
+        }
+
+        .breakdown-list {
+            list-style: none;
+        }
+
+        .breakdown-list li {
+            padding: 0.75rem;
+            background: var(--bg-tertiary);
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .breakdown-list i {
+            color: var(--success-color);
+            margin-right: 0.5rem;
+        }
+
+        .transaction-preview {
+            background: var(--bg-tertiary);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 968px) {
+            .playground-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <i class="fas fa-shield-alt"></i>
+                <span>Privacy x402</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="docs.html">Docs</a></li>
+                <li><a href="examples.html">Examples</a></li>
+                <li><a href="api.html">API</a></li>
+                <li><a href="playground.html" class="active">Playground</a></li>
+                <li><a href="deployment.html">Deploy</a></li>
+                <li><a href="https://github.com/SterlingENS/Polymarket-Arb" target="_blank" class="github-link">
+                    <i class="fab fa-github"></i> GitHub
+                </a></li>
+            </ul>
+            <button class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Playground Section -->
+    <section class="playground">
+        <div class="container">
+            <h1 class="section-title">Interactive Privacy Calculator</h1>
+            <p class="section-subtitle">Calculate your transaction's privacy score in real-time</p>
+
+            <div class="playground-grid">
+                <!-- Configuration Panel -->
+                <div class="playground-panel">
+                    <h2><i class="fas fa-sliders-h"></i> Configuration</h2>
+                    <form id="privacy-form">
+                        <div class="form-group">
+                            <label>Privacy Level</label>
+                            <select id="privacy-level">
+                                <option value="0">0 - NONE (No privacy)</option>
+                                <option value="1">1 - BASIC (Encryption only)</option>
+                                <option value="2" selected>2 - STEALTH (+ Stealth addresses)</option>
+                                <option value="3">3 - ZERO_KNOWLEDGE (+ ZK proofs)</option>
+                                <option value="4">4 - MAXIMUM (All features)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Privacy Features</label>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="stealth-address" checked>
+                                <label for="stealth-address">Stealth Address (+0.25)</label>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="zk-proof">
+                                <label for="zk-proof">Zero-Knowledge Proof (+0.30)</label>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="mixing">
+                                <label for="mixing">Transaction Mixing (up to +0.20)</label>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="obfuscation">
+                                <label for="obfuscation">Obfuscation Seed (+0.10)</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Mixing Factor (1-15)</label>
+                            <input type="number" id="mixing-factor" min="1" max="15" value="5">
+                            <small style="color: var(--text-muted)">Number of transactions to mix with</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Transaction Amount (for demo)</label>
+                            <input type="text" id="tx-amount" value="0.1" placeholder="0.1">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Blockchain</label>
+                            <select id="blockchain">
+                                <option value="ethereum">Ethereum</option>
+                                <option value="solana" selected>Solana</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="width: 100%">
+                            <i class="fas fa-calculator"></i> Calculate Privacy Score
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Results Panel -->
+                <div class="playground-panel">
+                    <h2><i class="fas fa-chart-line"></i> Results</h2>
+                    <div id="privacy-result" style="display: none;">
+                        <div class="score-display">
+                            <div class="score-number" id="score-value">0.00</div>
+                            <p style="color: var(--text-muted); margin-bottom: 0;">Privacy Score</p>
+                        </div>
+
+                        <div class="score-bar-container">
+                            <div class="score-bar-fill" id="score-bar" style="width: 0%">
+                                <span id="score-percent">0%</span>
+                            </div>
+                        </div>
+
+                        <div class="result-card">
+                            <h3><i class="fas fa-info-circle"></i> Assessment</h3>
+                            <p id="score-description"></p>
+                        </div>
+
+                        <div class="result-card">
+                            <h3><i class="fas fa-list"></i> Score Breakdown</h3>
+                            <ul class="breakdown-list" id="score-breakdown"></ul>
+                        </div>
+
+                        <div class="result-card">
+                            <h3><i class="fas fa-shield-alt"></i> Protection Against</h3>
+                            <ul class="breakdown-list" id="protection-list"></ul>
+                        </div>
+
+                        <div class="result-card">
+                            <h3><i class="fas fa-code"></i> Transaction Preview</h3>
+                            <div class="transaction-preview" id="tx-preview"></div>
+                        </div>
+                    </div>
+
+                    <div id="initial-message" style="text-align: center; padding: 4rem 2rem; color: var(--text-muted);">
+                        <i class="fas fa-calculator" style="font-size: 3rem; margin-bottom: 1rem; display: block;"></i>
+                        <p>Configure your privacy settings and click "Calculate Privacy Score" to see results</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Privacy x402 Protocol</h3>
+                    <p>Privacy-preserving transactions for DeFi</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="docs.html">Documentation</a></li>
+                        <li><a href="examples.html">Examples</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Privacy x402 Protocol. Licensed under MIT.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Enhanced privacy calculator
+        document.getElementById('privacy-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const privacyLevel = parseInt(document.getElementById('privacy-level').value);
+            const stealthAddress = document.getElementById('stealth-address').checked;
+            const zkProof = document.getElementById('zk-proof').checked;
+            const mixing = document.getElementById('mixing').checked;
+            const obfuscation = document.getElementById('obfuscation').checked;
+            const mixingFactor = parseInt(document.getElementById('mixing-factor').value) || 0;
+            const amount = document.getElementById('tx-amount').value;
+            const blockchain = document.getElementById('blockchain').value;
+
+            // Calculate privacy score
+            let score = privacyLevel * 0.15;
+            const breakdown = [];
+
+            breakdown.push({
+                feature: 'Base Privacy Level',
+                value: (privacyLevel * 0.15).toFixed(2),
+                description: `Level ${privacyLevel} contribution`
+            });
+
+            if (stealthAddress) {
+                score += 0.25;
+                breakdown.push({
+                    feature: 'Stealth Address',
+                    value: '0.25',
+                    description: 'One-time payment address'
+                });
+            }
+
+            if (zkProof) {
+                score += 0.3;
+                breakdown.push({
+                    feature: 'Zero-Knowledge Proof',
+                    value: '0.30',
+                    description: 'Cryptographic validity proof'
+                });
+            }
+
+            if (mixing) {
+                const mixingScore = Math.min(mixingFactor * 0.02, 0.2);
+                score += mixingScore;
+                breakdown.push({
+                    feature: 'Transaction Mixing',
+                    value: mixingScore.toFixed(2),
+                    description: `Mixing with ${mixingFactor} transactions`
+                });
+            }
+
+            if (obfuscation) {
+                score += 0.1;
+                breakdown.push({
+                    feature: 'Obfuscation Seed',
+                    value: '0.10',
+                    description: 'Additional data obfuscation'
+                });
+            }
+
+            score = Math.min(score, 1.0);
+
+            // Update UI
+            document.getElementById('initial-message').style.display = 'none';
+            document.getElementById('privacy-result').style.display = 'block';
+            document.getElementById('score-value').textContent = score.toFixed(2);
+            document.getElementById('score-bar').style.width = (score * 100) + '%';
+            document.getElementById('score-percent').textContent = Math.round(score * 100) + '%';
+
+            // Set color based on score
+            const color = getScoreColor(score);
+            document.getElementById('score-bar').style.background = `linear-gradient(90deg, ${color}, ${color}dd)`;
+
+            // Description
+            document.getElementById('score-description').textContent = getScoreDescription(score);
+
+            // Breakdown
+            let breakdownHTML = '';
+            breakdown.forEach(item => {
+                breakdownHTML += `
+                    <li>
+                        <span><i class="fas fa-check-circle"></i> ${item.feature}</span>
+                        <strong>+${item.value}</strong>
+                    </li>
+                `;
+            });
+            document.getElementById('score-breakdown').innerHTML = breakdownHTML;
+
+            // Protection list
+            const protections = getProtections(score, stealthAddress, zkProof, mixing);
+            let protectionHTML = '';
+            protections.forEach(protection => {
+                protectionHTML += `<li><i class="fas fa-shield-alt"></i> ${protection}</li>`;
+            });
+            document.getElementById('protection-list').innerHTML = protectionHTML;
+
+            // Transaction preview
+            const txPreview = `{
+  "id": "x402_${Date.now()}_demo",
+  "amount": "${amount}",
+  "blockchain": "${blockchain}",
+  "privacyLevel": ${privacyLevel},
+  "privacyScore": ${score.toFixed(2)},
+  "features": {
+    "encrypted": true,
+    "stealthAddress": ${stealthAddress},
+    "zkProof": ${zkProof},
+    "mixing": ${mixing},
+    "obfuscation": ${obfuscation}
+  },
+  "timestamp": ${Date.now()}
+}`;
+            document.getElementById('tx-preview').textContent = txPreview;
+        });
+
+        function getProtections(score, stealth, zk, mixing) {
+            const protections = ['Basic encryption protection'];
+            if (stealth) protections.push('Transaction correlation prevention');
+            if (stealth) protections.push('Recipient anonymity');
+            if (zk) protections.push('Amount privacy');
+            if (zk) protections.push('Validity proof without disclosure');
+            if (mixing) protections.push('Timing analysis resistance');
+            if (score >= 0.7) protections.push('Network-level privacy');
+            if (score >= 0.9) protections.push('Maximum privacy guarantees');
+            return protections;
+        }
+
+        // Auto-check features based on privacy level
+        document.getElementById('privacy-level').addEventListener('change', function() {
+            const level = parseInt(this.value);
+            document.getElementById('stealth-address').checked = level >= 2;
+            document.getElementById('zk-proof').checked = level >= 3;
+            document.getElementById('mixing').checked = level >= 4;
+            document.getElementById('obfuscation').checked = level >= 4;
+        });
+    </script>
+</body>
+</html>
